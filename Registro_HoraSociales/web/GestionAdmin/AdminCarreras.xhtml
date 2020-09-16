@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .cars-datalist .text-column p:last-child{
+                color:#757575;
+            }
+
+            .cars-datalist .car-item i, .cars-datalist .car-item .car-details {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .cars-datalist .car-item button {
+                float: right;
+            }
+
+            .cars-datalist ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ui-car-display td:last-child {
+                font-weight: 700;
+            }
+
+            @media (max-width:640px) {
+                .cars-datalist .text-column {
+                    text-align: center;
+                }
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="title">Listado de carreras</ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    
+                    <div class="card card-w-title">
+                        <p:button value="Nueva carrera" outcome="/GestionAdmin/insertCarrera" />
+                        <p:dataTable var="car" value="#{carreraController.carreras}" selectionMode="single" reflow="true"
+                                     selection="#{carreraController.carreraSelector}" rowKey="#{car.idcarrera}" paginator="true" rows="10">
+
+                            <f:facet name="header">
+                                <h3> Carreras disponibles</h3>
+                            </f:facet>
+                            <p:column headerText="Código de carrera" sortBy="#{car.codigocarrera}">
+                                <h:outputText value="#{car.codigocarrera}" />
+                            </p:column>
+
+                            <p:column headerText="Carrera" sortBy="#{car.nombrecarrera}">
+                                <h:outputText value="#{car.nombrecarrera}" />
+                            </p:column>
+                            <p:column headerText="Acciones" >
+                                <p:column>
+                                    <p:button value="Modificar"/>
+                                </p:column>
+                                <p:column>
+                                    <p:button    value="Eliminar" />
+                                </p:column>
+                            </p:column>
+                        </p:dataTable>
+                       
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
