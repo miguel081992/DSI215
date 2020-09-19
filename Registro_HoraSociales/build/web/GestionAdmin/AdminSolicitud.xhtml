@@ -72,10 +72,28 @@
                             </p:column>
                             <p:column headerText="Acciones">
                                 <p:column>
-                                    <p:button value="Confirmar"/>
+                                    <p:growl id="messageAccept" showDetail="true" />
+
+                                    <p:commandButton update="messageAccept" icon="ui-icon-check">
+                                        <p:confirm header="Confirmación" message="¿Aceptar solicitud de #{solic.due}?" icon="pi pi-exclamation-triangle" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton action="/GestionAdmin/AdminCarreras?faces-redirect=true" value="Sí" styleClass="ui-confirmdialog-no" actionListener="#{carreraController.deleteCarreraById(car.idcarrera)}"/>
+                                        <p:commandButton action="/GestionAdmin/AdminCarreras?faces-redirect=true" value="No" styleClass="ui-confirmdialog-no"/>
+                                    </p:confirmDialog> 
                                 </p:column>
                                 <p:column>
-                                    <p:button value="Denegar"/>
+                                    <p:growl id="messageDeny" showDetail="true" />
+
+                                    <p:commandButton update="messageDeny" icon="ui-icon-close">
+                                        <p:confirm header="Confirmación" message="¿Está seguro de negar solicitud de #{solic.due}?" icon="pi pi-exclamation-triangle" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton action="/GestionAdmin/AdminCarreras?faces-redirect=true" value="Sí" styleClass="ui-confirmdialog-no" actionListener="#{carreraController.deleteCarreraById(car.idcarrera)}"/>
+                                        <p:commandButton action="/GestionAdmin/AdminCarreras?faces-redirect=true" value="No" styleClass="ui-confirmdialog-no"/>
+                                    </p:confirmDialog> 
                                 </p:column>
                             </p:column>
                         </p:dataTable>

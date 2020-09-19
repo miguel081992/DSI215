@@ -81,6 +81,16 @@ public class carreraController implements Serializable {
     public String getFormName() {
         return formName;
     }
+    
+    public void deleteCarreraById(int id){
+        try{
+            carreraRepo = ApplicationContextProvider.getApplicationContext().getBean(CarreraRepository.class);
+            carreraRepo.delete(id);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     public void setFormName(String formName) {
         this.formName = formName;
